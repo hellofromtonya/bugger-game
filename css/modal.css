@@ -1,0 +1,135 @@
+/*
+ * Modals
+ *-------------------------------------*/
+.modal {
+    display: none;
+    z-index: 50;
+
+    text-align: center;
+    background-color: #fff;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    padding: 10px;
+
+    font-size: 20px;
+    font-size: 2.0rem;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.modal.active {
+    max-width: 100%;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+
+.modal:not(.modal__setup).active {
+    animation: 1s fadeIn;
+}
+
+.modal__content {
+    max-width: 90%;
+    margin: 0 auto;
+    padding: 50px 0;
+}
+
+.modal .loader {
+    font-size: 60px;
+    font-weight: 100;
+    color: green;
+
+    animation: 1s scaleBigText 1s;
+}
+
+.modal .button {
+    color: #fff;
+    background-color: green;
+    border: 1px solid green;
+
+    cursor: pointer;
+    font-weight: 400;
+    letter-spacing: 1px;
+    padding: 16px 24px;
+    width: auto;
+    border-radius: 5px;
+}
+
+.modal .button:hover {
+    background-color: #fff;
+    color: green;
+}
+
+/** Pick Character **/
+
+.character__container {
+    padding: 0;
+    margin: 0 auto;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.character__container .character__image {
+    list-style: none;
+    cursor: pointer;
+    width: 200px;
+    height: 200px;
+    margin-bottom: 20px;
+}
+
+.character__container .character__image:hover {
+    background-color: #f2f2f2;
+}
+
+.character__container .character__image.active {
+    border: 1px dotted #cc0000;
+    background-color: #f2f2f2;
+}
+
+/*.character__image:hover {*/
+    /*background-color: #d2d2d2;*/
+/*}*/
+
+/** Level Up Modal **/
+
+.modal__levelup {
+    background-color: slateblue;
+    padding: 10px;
+    color: #fff;
+}
+
+.rising-notification {
+    display: block;
+    position: absolute;
+
+    animation: riseUp 3s linear 0.5s normal 1 both;
+
+    font-size: 200%;
+    color: slateblue;
+}
+
+/** Game Won Modal **/
+
+
+/** Game Lost Modal **/
+
+.modal__lost-game {
+    background-color: #cc0000;
+    color: #fff;
+}
+
+.modal__lost-game .loader {
+    color: #fff;
+}
