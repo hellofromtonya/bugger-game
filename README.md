@@ -6,8 +6,7 @@ I built this game as part of the [Udacity Front-End Web Developer Nanodegree](ht
 
 ## How to Play
 
-You can play the game in your browser by [clicking here]().
-
+You can clone or download this game to your computer. Or you can play it in [your browser](https://rawgit.com/hellofromtonya/bugger-game/master/index.html)
 
 1. Select your player's character:
 

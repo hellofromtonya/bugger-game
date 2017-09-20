@@ -14,20 +14,11 @@ class GameController {
    */
   constructor(player, gameBoard, modals = {setup: {}, wonModal: {}, lostModal: {}}) {
     this._player = player;
-    this._enemies = [];
     this._gameBoard = gameBoard;
     this._modals = modals;
     this._lastTime = 0;
-  }
 
-  /**
-   * @description Initialize the game
-   *
-   * @method
-   */
-  init() {
-    // TODO - Create multiple bugs at different positions.
-    this._enemies.push(new Enemy());
+    this._enemies = new EnemyPool(this._gameBoard.ctx);
   }
 
   /*****************************
@@ -84,8 +75,8 @@ class GameController {
    * @method
    */
   updatePlayerCharacter(target) {
-    if (! (target.classList.contains('character__image') ||
-        target.nodeName == 'IMG' && target.parentNode.classList.contains('character__image'))) {
+    if (!(target.classList.contains('character__image') ||
+            target.nodeName == 'IMG' && target.parentNode.classList.contains('character__image'))) {
       return false;
     }
 
@@ -99,7 +90,12 @@ class GameController {
     }
 
     this._modals.setup.setCharacter(li);
-    this._player.setSprite(img.getAttribute('src'));
+    this._player.setSprite(
+        img.getAttribute('src'),
+        // this is our callback, which will run once the image is loaded.
+        // we are passing the object to set `this` to our modal.
+        {obj: this._modals.setup, cb: this._modals.setup.showPlayButton}
+    );
 
     return false;
   }
@@ -111,13 +107,13 @@ class GameController {
    */
   startNewGame() {
     this.reset();
+
+    this._enemies.create(EnemyPool.generateRandom(6, 3));
     this.updateGamePieces();
     this.render();
 
-    setTimeout(function(){
-      this._lastTime = Date.now();
-      this.play();
-    }.bind(this), 300);
+    this._lastTime = Date.now();
+    this.play();
 
     return false;
   }
@@ -200,7 +196,7 @@ class GameController {
   render() {
     this._gameBoard.render();
     this._player.render(this._gameBoard.ctx);
-    this._enemies.forEach(enemy => enemy.render(this._gameBoard.ctx));
+    this._enemies.render();
   }
 
   /**
@@ -209,13 +205,13 @@ class GameController {
    * @method
    */
   reset() {
-    this._gameBoard.reset();
-    this._enemies.forEach(enemy => enemy.reset());
-    this._player.reset();
-
     for (let modalKey in this._modals) {
       this._modals[modalKey].hide();
     }
+
+    this._gameBoard.reset();
+    this._enemies.reset();
+    this._player.reset();
   }
 
   /**
@@ -225,13 +221,15 @@ class GameController {
    * @method
    */
   updateGamePieces(dt = 0.0) {
-    this._enemies.forEach(enemy => enemy.update(dt));
+    this._enemies.update(dt);
     this._player.update();
   }
 
   /**
    * @description Game is over handler. Show the appropriate modal.
    * @param playerWon
+   *
+   * @method
    */
   gameOver(playerWon = false) {
     if (playerWon === true) {

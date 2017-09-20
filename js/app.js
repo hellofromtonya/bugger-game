@@ -28,20 +28,36 @@ const gameConfig = {
     }
   },
   rows: 6,
-  columns: 5
+  columns: 5,
+  gamePiece: {
+    w: 101,
+    h: 171
+  }
 };
+
+// Pre-load the known game images.
+Resources.load([
+  'images/stone-block.png',
+  'images/water-block.png',
+  'images/grass-block.png',
+  'images/enemy-bug.png',
+]);
 
 const gameController = new GameController(
     new Player(),
-    new GameBoard(),
+    new GameBoard({
+      boardWidth: gameConfig.dims.w,
+      boardHeight: gameConfig.dims.h,
+      rows: gameConfig.rows,
+      columns: gameConfig.columns
+    }),
     {
       setup: new Modal('setup'),
-      wonModal: new Modal('won-game-modal'),
-      lostModal: new Modal('lost-game-modal')
+      wonModal:
+          new Modal('won-game-modal'),
+      lostModal:
+          new Modal('lost-game-modal')
     }
 );
 
-Resources.onReady(function() {
-  gameController.init();
-  gameController.registerEventListeners();
-});
+gameController.registerEventListeners();
