@@ -22,11 +22,13 @@ Move into empty spaces, avoiding the bugs.  If your player collides into a bug o
 
 4. Collect the gems to win more points.
 
+### How Do You Win?
+
+If your player makes it to the water, then bam, you win!
+
 ## Game Overview
 
-### Scoring
-
-### How to Level Up
+This game is built in ES6 OOP.  Then the distribution files are optimized for ES2015 using babel and gulp.
 
 ## Credits
 

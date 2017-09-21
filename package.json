@@ -1,0 +1,32 @@
+{
+  "name": "bugger-game",
+  "version": "0.0.1",
+  "description": "Bugger Game - Some fun with JavaScript ES6 OOP",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hellofromtonya/bugger-game"
+  },
+  "author": "hellofromTonya",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hellofromtonya/bugger-game/issues"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "~6",
+    "del": "~3",
+    "eslint": "~4",
+    "eslint-config-udacity": "^2.0.2",
+    "eslint-plugin-import": "^2.7.0",
+    "gulp": "~3",
+    "gulp-babel": "~6",
+    "gulp-cheerio": "~0",
+    "gulp-concat": "~2",
+    "gulp-eslint": "~4",
+    "gulp-cssnano": "~2",
+    "gulp-notify": "~3",
+    "gulp-plumber": "~1",
+    "gulp-rename": "~1",
+    "gulp-uglify": "~3",
+    "gulp-util": "~3"
+  }
+}
