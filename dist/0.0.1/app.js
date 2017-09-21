@@ -1507,7 +1507,7 @@ var gameConfig = {
 };
 
 // Pre-load the known game images.
-Resources.load(['images/stone-block.png', 'images/water-block.png', 'images/grass-block.png', 'images/enemy-bug.png', 'images/selector.png', 'images/gem-blue.png', 'images/gem-green.png', 'images/gem-orange.png']);
+Resources.load(['images/stone-block.png', 'images/water-block.png', 'images/grass-block.png', 'images/enemy-bug.png', 'images/gem-blue.png', 'images/gem-green.png', 'images/gem-orange.png']);
 
 var gameController = new GameController(new Player(), new GameBoard({
   boardWidth: gameConfig.dims.w,

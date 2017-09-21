@@ -33,7 +33,6 @@ Resources.load([
   'images/water-block.png',
   'images/grass-block.png',
   'images/enemy-bug.png',
-  'images/selector.png',
   'images/gem-blue.png',
   'images/gem-green.png',
   'images/gem-orange.png',
