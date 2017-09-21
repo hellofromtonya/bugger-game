@@ -3,15 +3,14 @@
 class Player extends GamePiece {
   /**
    * @description Player constructor
-   * @param {object} coords {X, y} coordinates on the game board
+   * @param {number} row Row number of where to put the player
+   * @param {number} col Column number of where to put the player
    * @param {string} sprite Player's character image
    * @constructor
    */
-  constructor({row = 5} = {}) {
-    super({row});
+  constructor({row = 5, col = 3} = {}) {
+    super({row, col});
 
-    this.startingPosition.x = gameConfig.dims.w / 2 - this.insertionMidPt.x;
-    this.coords.x = this.startingPosition.x;
     this.allowedKeys = {
       37: 'left',
       38: 'up',
@@ -20,13 +19,18 @@ class Player extends GamePiece {
     };
 
     this._score = 0;
-    this._level = 1;
   }
+
+  /*****************************
+   * Move Handlers
+   ****************************/
 
   /**
    * @description Checks if the keyboard input is a valid move command
    * @param {number} keyCode Keyboard code
    * @returns {boolean}
+   *
+   * @method
    */
   isValidMoveCommand(keyCode) {
     return this.allowedKeys.hasOwnProperty(keyCode);
@@ -36,6 +40,8 @@ class Player extends GamePiece {
    * @description Handles the move command.
    * @param {number} keyCode Keyboard code
    * @returns {boolean}
+   *
+   * @method
    */
   handleInput(keyCode) {
     switch (this.allowedKeys[keyCode]) {
@@ -52,50 +58,40 @@ class Player extends GamePiece {
         this.coords.y = Math.min(this.coords.y + gameConfig.space.h, gameConfig.boundLimits.down);
         break;
     }
+
+    this.updateLocation();
   }
 
   /**
-   * @description Tallies the Player's Game Statistics
-   *
-   * @param {Boolean} skipLevelUp When true, skips the level up checker
-   * @returns {{score: (number|*), levelingUp, level: number}}
-   *
-   * @method
-   */
-  tallyGameStats(skipLevelUp = false) {
-    const canLevelUp = !skipLevelUp ? this.canLevelUp() : false;
-
-    if (canLevelUp) {
-      this._level++;
-    }
-
-    return {
-      score: this._score,
-      leveledUp: canLevelUp,
-      level: this._level
-    };
-  }
-
-  update(dt = 0) {
-    // this.checkWon();
-  }
-
-  won() {
-    return this.coords.y <= gameConfig.boundLimits.up;
-  }
-
-  /**
-   * @description Checks if the player can level up
-   *
+   * Checks if the player has won, meaning this player is in the water.
    * @returns {boolean}
    *
    * @method
    */
-  canLevelUp() {
-    // return this._score >= this._levelUpRules.score;
+  hasWon() {
+    return this.getLocation(true).row === 1;
   }
 
-  resetStats() {
+  /*****************************
+   * Scoring
+   ****************************/
 
+  /**
+   * @description Add points to the player's score.
+   * @param {number} points Number of points to add to the player's score.
+   *              (Can be negative)
+   */
+  addScore(points = 0) {
+    this._score += points;
+  }
+
+  /**
+   * @description Get the player's score.
+   * @return {number}
+   *
+   * @method
+   */
+  getScore() {
+    return this._score;
   }
 }

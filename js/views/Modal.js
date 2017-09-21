@@ -2,14 +2,19 @@ class Modal {
   constructor(modalID) {
     this._modal = document.getElementById(modalID);
     this._playButton = this._modal.getElementsByClassName('play-again')[0];
+    this._score = this._modal.getElementsByClassName('score');
   }
 
   /**
    * @description Show the modal.
+   * @param {number} score Player's score to be displayed
    *
    * @method
    */
-  show() {
+  show(score = 0) {
+    if (this._score.length > 0) {
+      this._score[0].innerHTML = score;
+    }
     this._modal.classList.add('active');
   }
 

@@ -1,13 +1,5 @@
 'use strict';
 
-/**
- * Things that I need to add:
- *
- * 2. Scoring
- * 3. Leveling up
- * 4. Multiple enemies
- */
-
 const gameConfig = {
   dims: {
     w: 505,
@@ -41,6 +33,10 @@ Resources.load([
   'images/water-block.png',
   'images/grass-block.png',
   'images/enemy-bug.png',
+  'images/selector.png',
+  'images/gem-blue.png',
+  'images/gem-green.png',
+  'images/gem-orange.png',
 ]);
 
 const gameController = new GameController(
@@ -53,10 +49,8 @@ const gameController = new GameController(
     }),
     {
       setup: new Modal('setup'),
-      wonModal:
-          new Modal('won-game-modal'),
-      lostModal:
-          new Modal('lost-game-modal')
+      wonModal: new Modal('won-game-modal'),
+      lostModal: new Modal('lost-game-modal')
     }
 );
 

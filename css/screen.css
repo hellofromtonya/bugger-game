@@ -3,35 +3,13 @@
  *-------------------------------------*/
 
 .screen {
-    z-index: 1;
-    position: relative;
-    right: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-
+    max-width: 505px;
     margin: 0 auto;
     padding: 0;
-    width: 90%;
-
-    perspective: 1000px;
-    -webkit-transition: -webkit-transform 0.5s;
-    transition: transform 0.5s;
 }
 
-.screen__header,
-.screen__footer,
-.screen__content {
-    width: 100%;
-    min-height: 50px;
-    margin: 10px auto;
-    padding: 0;
-}
-
-.screen__header p,
-.screen__footer p {
-    margin-bottom: 0;
+.screen__header {
+    margin-top: 40px;
 }
 
 .screen .game-control {
@@ -46,64 +24,19 @@
  * Game Screen
  *-------------------------------------*/
 
-.screen__game .screen__header,
-.screen__game .screen__footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    flex-direction: row;
-    text-align: center;
-}
-
-.screen__game .header__panel {
-    font-size: 13px;
-    text-align: center;
-}
-
-.screen__game .header__game-clock h2,
-.screen__game .header__panel span {
-    font-size: 18px;
+.screen__game h1,
+.screen__game p {
+    display: inline-block;
+    float: left;
     margin-bottom: 0;
 }
 
-.header__panel,
-.screen__nav li {
-    display: inline-block;
-}
-
-.screen__nav ul {
-    padding: 0;
-    margin: 0 10px 0 0;
-}
-
-.screen__nav li {
-    list-style: none;
+.screen__game p {
+    float: right;
 }
 
 .screen__game canvas {
     display: block;
     margin: 0 auto;
-}
-
-/** Game Footer Navigation **/
-
-.screen__nav li {
-    width: 50px;
-    height: 50px;
-    font-size: 22px;
-    line-height: 50px;
-    text-align: center;
-    border-radius: 50%;
-    color: #fff;
-    background-color: #2e3d49;
-}
-
-.screen__nav li:hover {
-    background-color: #cc0000;
-}
-
-.screen__nav .fa,
-.screen__nav a {
-    color: #fff;
-    border-bottom: none;
+    padding: 0;
 }

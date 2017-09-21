@@ -49,9 +49,8 @@
 <!-- Game Screen -->
 <section id="game" class="screen screen__game">
     <header class="screen__header">
-        <div class="header__panel header__game-clock">
-            <h1>Bugger Game</h1>
-        </div>
+        <h1>Bugger Game</h1>
+        <p>Score: <span class="score block">0</span></p>
     </header>
 
     <div class="screen__content game-board-container">
@@ -67,7 +66,7 @@
         </div>
         <h2>Congratulations! You Won!</h2>
         <div class="modal__messages">
-            <!-- messages inserted programmatically here -->
+            <p>Your current score is <span class="score block">0</span></p>
         </div>
 
         <button class="button play-again game-control">Play again!</button>
@@ -86,15 +85,16 @@
 
 </section>
 
-<!-- Scripts - for production, scripts would be concentated and minified. -->
+<!-- Scripts - for production, scripts would be concatenated and minified. -->
 <script src="js/resources.js"></script>
-
-<!--<script src="js/engine.js"></script>-->
-<script src="js/pieces/GamePiece.js"></script>
-<script src="js/pieces/Player.js"></script>
-<script src="js/pieces/EnemyPool.js"></script>
 <script src="js/views/GameBoard.js"></script>
 <script src="js/views/Modal.js"></script>
+<script src="js/pieces/GamePiece.js"></script>
+<script src="js/pieces/Enemy.js"></script>
+<script src="js/pieces/GamePiecePool.js"></script>
+<script src="js/pieces/EnemyPool.js"></script>
+<script src="js/pieces/CollectiblePool.js"></script>
+<script src="js/pieces/Player.js"></script>
 <script src="js/GameController.js"></script>
 <script src="js/app.js"></script>
 </body>

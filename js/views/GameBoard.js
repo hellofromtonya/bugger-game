@@ -20,6 +20,10 @@ class GameBoard {
     this._columns = columns;
 
     document.getElementsByClassName('game-board-container')[0].appendChild(this.canvas);
+
+    this.elements = {
+      score: document.getElementsByClassName('score')[0],
+    }
   }
 
   reset() {
@@ -56,4 +60,13 @@ class GameBoard {
       }
     }
   }
+
+  /**
+   * @description Update the player's score.
+   *
+   * @method
+   */
+  updateScore(score) {
+    this.elements.score.innerHTML = score;
+  };
 }

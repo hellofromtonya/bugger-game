@@ -4,13 +4,14 @@ class GamePiece {
   /**
    * @description Instantiate a Game Piece
    * @param {number} row game board row
+   * @param {number} col game board column
    * @param {object} startingPosition Starting x,y position on the game board
    * @param {number} speed Game Piece's speed
    * @param {string} sprite Game Piece's 'image.png'
    *
    * @constructor
    */
-  constructor({row = 0, startingPosition = {x: null, y: null}, speed = 100, sprite = ''} = {}) {
+  constructor({row = 0, col = 0, startingPosition = {x: null, y: null}, speed = 100, sprite = ''} = {}) {
     if (sprite) {
       this.setSprite(`images/${sprite}`);
     }
@@ -18,28 +19,83 @@ class GamePiece {
       w: gameConfig.gamePiece.w,
       h: gameConfig.gamePiece.h
     };
+    this.speed = speed;
 
     this.insertionMidPt = {
       x: this.size.w / 2,
       y: this.size.h / 2 - 40
     };
 
-    // If no starting position was passed in, automatically calculate it.
-    startingPosition.x = !startingPosition.hasOwnProperty('x') || startingPosition.x === null
-        ? gameConfig.space.h / 2 - this.insertionMidPt.x
-        : startingPosition.x;
+    this.startingPosition = {
 
-    startingPosition.y = !startingPosition.hasOwnProperty('y') || startingPosition.y === null
-        ? row * gameConfig.space.h - gameConfig.space.mid.x - this.insertionMidPt.y
-        : startingPosition.y;
+      x: !startingPosition.hasOwnProperty('x') || startingPosition.x === null
+          ? col * gameConfig.space.w - gameConfig.space.mid.x - this.insertionMidPt.x
+          : startingPosition.x,
 
-    this.startingPosition = startingPosition;
-    this.speed = speed;
+      y: !startingPosition.hasOwnProperty('y') || startingPosition.y === null
+          ? row * gameConfig.space.h - gameConfig.space.mid.y - this.insertionMidPt.y
+          : startingPosition.y
+    };
+
     this.coords = {
       x: this.startingPosition.x,
       y: this.startingPosition.y
     };
+
+    this._location = this.getLocation();
+    this._points = 0;
   }
+
+  /**
+   * @description Gets the location on the board.
+   * @param {boolean} useCache When true, returns the cached location.
+   * @returns {{row: number, col: number}}
+   *
+   * @method
+   */
+  getLocation(useCache = false) {
+    if (!useCache) {
+      this.updateLocation();
+    }
+
+    return this._location;
+  }
+
+  /**
+   * @description Updates the location on the board.
+   *
+   * @method
+   */
+  updateLocation() {
+    this._location = {
+      row: this.getRowLocation(),
+      col: this.getColLocation()
+    }
+  }
+
+  /**
+   * @description Get the game piece's row
+   * @returns {number}
+   *
+   * @method
+   */
+  getRowLocation() {
+    return Math.min(Math.ceil(this.coords.y / gameConfig.space.h) + 1, gameConfig.rows);
+  }
+
+  /**
+   * @description Get the game piece's column
+   * @returns {number}
+   *
+   * @method
+   */
+  getColLocation() {
+    return Math.min(Math.ceil(this.coords.x / gameConfig.space.w) + 1, gameConfig.columns);
+  }
+
+  /*****************************
+   * Game Board Positioning
+   ****************************/
 
   /**
    * @description Update the game piece's position on the board.
@@ -77,6 +133,7 @@ class GamePiece {
   reset() {
     this.coords.x = this.startingPosition.x;
     this.coords.y = this.startingPosition.y;
+    this.updateLocation();
   }
 
   /**
@@ -97,5 +154,26 @@ class GamePiece {
         callback.cb.call(callback.obj);
       });
     }
+  }
+
+  /*****************************
+   * Scoring
+   ****************************/
+
+  /**
+   * @description Set the points for this game piece. Used for
+   *              game scoring.
+   * @param {number} points
+   */
+  setPoints(points) {
+    this._points = points;
+  }
+
+  /**
+   * @description Get the points for this game piece.
+   * @param {number} points
+   */
+  getPoints() {
+    return this._points;
   }
 }
