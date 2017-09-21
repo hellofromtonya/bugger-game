@@ -119,7 +119,7 @@ class GamePiecePool {
    * @method
    */
   generateUniqueCoords(rowRange = {max: 4, min: 2}, columnRange = {max: 6, min: 1}) {
-    let coords = {x:0, y:0};
+    let coords = {x: 0, y: 0};
 
     while (true) {
       coords = {

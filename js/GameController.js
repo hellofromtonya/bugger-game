@@ -279,8 +279,8 @@ class GameController {
     let score = this._player.getScore();
 
     let points = playerWon === true
-      ? 10000
-      : score > 10000 ? -10000 : -score;
+        ? 10000
+        : score > 10000 ? -10000 : -score;
 
     this._player.addScore(points);
     score = this._player.getScore();

@@ -44,6 +44,4 @@ class EnemyPool extends GamePiecePool {
 
     return enemy;
   }
-
-
 }
